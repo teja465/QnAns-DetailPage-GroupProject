@@ -78436,7 +78436,49 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 _MDEditor.default.Markdown = _reactMarkdownPreview.default;
 var _default = _MDEditor.default;
 exports.default = _default;
-},{"@uiw/react-markdown-preview":"../node_modules/@uiw/react-markdown-preview/lib/esm/index.js","./MDEditor":"../node_modules/@uiw/react-md-editor/lib/esm/MDEditor.js","./commands":"../node_modules/@uiw/react-md-editor/lib/esm/commands/index.js","./utils/markdownUtils":"../node_modules/@uiw/react-md-editor/lib/esm/utils/markdownUtils.js"}],"../src/qna/QuestionDetail.jsx":[function(require,module,exports) {
+},{"@uiw/react-markdown-preview":"../node_modules/@uiw/react-markdown-preview/lib/esm/index.js","./MDEditor":"../node_modules/@uiw/react-md-editor/lib/esm/MDEditor.js","./commands":"../node_modules/@uiw/react-md-editor/lib/esm/commands/index.js","./utils/markdownUtils":"../node_modules/@uiw/react-md-editor/lib/esm/utils/markdownUtils.js"}],"../src/utils/IsCode.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+function IsCode(qn) {
+  // checks whether is there code in question  mardkdown if yes reurn True else return false
+  //console.log("isCode",qn) 
+  var start;
+  var end;
+  var is_code = false;
+
+  for (var i = 0; i < qn.length - 3; i++) {
+    const f = qn[i] + qn[i + 1] + qn[i + 2]; //console.log(f)
+
+    if (f == "```") {
+      // console.log("got start",f,i)
+      start = i;
+      break;
+    }
+  }
+
+  if (start !== undefined) {
+    for (var i = start + 1; i < qn.length - 2; i++) {
+      const f = qn[i] + qn[i + 1] + qn[i + 2]; //console.log(f)
+
+      if (f == "```") {
+        //console.log("got end",f,i)
+        end = i;
+        break;
+      }
+    }
+  }
+
+  return [start, end]; // console.log("start,end ",start,end)
+}
+
+var _default = IsCode;
+exports.default = _default;
+},{}],"../src/qna/QuestionDetail.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -78475,6 +78517,8 @@ var _ThumbDown = _interopRequireDefault(require("@material-ui/icons/ThumbDown"))
 var _dateFns = require("date-fns");
 
 var _reactMdEditor = _interopRequireDefault(require("@uiw/react-md-editor"));
+
+var _IsCode = _interopRequireDefault(require("../utils/IsCode"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -78522,7 +78566,8 @@ function QuestionCardDetail({
 
   const [disLikesNo, setdisLikesNo] = _react.default.useState(8);
 
-  let date_on_profile = (0, _dateFns.formatDistance)((0, _dateFns.subDays)(new Date(question.date), 0), new Date()); //  questionDesc[Text]
+  let date_on_profile = (0, _dateFns.formatDistance)((0, _dateFns.subDays)(new Date(question.date), 0), new Date()); // console.log(IsCode(question.body))
+  //  questionDesc[Text]
   //Likes array
   //dislikes array
   //author name,id,
@@ -78579,7 +78624,7 @@ function QuestionCardDetail({
     color: "primary"
   }) : /*#__PURE__*/_react.default.createElement(_ThumbDownAltOutlined.default, null)), /*#__PURE__*/_react.default.createElement(_Typography.default, null, " ", disLikesNo))));
 }
-},{"react":"../node_modules/react/index.js","@material-ui/core/styles":"../node_modules/@material-ui/core/esm/styles/index.js","@material-ui/core/Card":"../node_modules/@material-ui/core/esm/Card/index.js","@material-ui/core/CardHeader":"../node_modules/@material-ui/core/esm/CardHeader/index.js","@material-ui/core/CardContent":"../node_modules/@material-ui/core/esm/CardContent/index.js","@material-ui/core/CardActions":"../node_modules/@material-ui/core/esm/CardActions/index.js","@material-ui/core/Avatar":"../node_modules/@material-ui/core/esm/Avatar/index.js","@material-ui/core/IconButton":"../node_modules/@material-ui/core/esm/IconButton/index.js","@material-ui/core/Typography":"../node_modules/@material-ui/core/esm/Typography/index.js","@material-ui/core/colors":"../node_modules/@material-ui/core/esm/colors/index.js","@material-ui/icons/ThumbUpAlt":"../node_modules/@material-ui/icons/ThumbUpAlt.js","@material-ui/icons/ThumbUpAltOutlined":"../node_modules/@material-ui/icons/ThumbUpAltOutlined.js","@material-ui/icons/ThumbDownAltOutlined":"../node_modules/@material-ui/icons/ThumbDownAltOutlined.js","@material-ui/icons/ThumbDown":"../node_modules/@material-ui/icons/ThumbDown.js","date-fns":"../node_modules/date-fns/esm/index.js","@uiw/react-md-editor":"../node_modules/@uiw/react-md-editor/lib/esm/index.js"}],"../node_modules/tslib/tslib.es6.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","@material-ui/core/styles":"../node_modules/@material-ui/core/esm/styles/index.js","@material-ui/core/Card":"../node_modules/@material-ui/core/esm/Card/index.js","@material-ui/core/CardHeader":"../node_modules/@material-ui/core/esm/CardHeader/index.js","@material-ui/core/CardContent":"../node_modules/@material-ui/core/esm/CardContent/index.js","@material-ui/core/CardActions":"../node_modules/@material-ui/core/esm/CardActions/index.js","@material-ui/core/Avatar":"../node_modules/@material-ui/core/esm/Avatar/index.js","@material-ui/core/IconButton":"../node_modules/@material-ui/core/esm/IconButton/index.js","@material-ui/core/Typography":"../node_modules/@material-ui/core/esm/Typography/index.js","@material-ui/core/colors":"../node_modules/@material-ui/core/esm/colors/index.js","@material-ui/icons/ThumbUpAlt":"../node_modules/@material-ui/icons/ThumbUpAlt.js","@material-ui/icons/ThumbUpAltOutlined":"../node_modules/@material-ui/icons/ThumbUpAltOutlined.js","@material-ui/icons/ThumbDownAltOutlined":"../node_modules/@material-ui/icons/ThumbDownAltOutlined.js","@material-ui/icons/ThumbDown":"../node_modules/@material-ui/icons/ThumbDown.js","date-fns":"../node_modules/date-fns/esm/index.js","@uiw/react-md-editor":"../node_modules/@uiw/react-md-editor/lib/esm/index.js","../utils/IsCode":"../src/utils/IsCode.js"}],"../node_modules/tslib/tslib.es6.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -108475,7 +108520,49 @@ exports.firestore = firestore;
 const storage = _app.default.storage();
 
 exports.storage = storage;
-},{"firebase/app":"../node_modules/firebase/app/dist/index.cjs.js","firebase/auth":"../node_modules/firebase/auth/dist/index.esm.js","firebase/firestore":"../node_modules/firebase/firestore/dist/index.esm.js","firebase/storage":"../node_modules/firebase/storage/dist/index.esm.js"}],"../src/qna/AnswerComp.jsx":[function(require,module,exports) {
+},{"firebase/app":"../node_modules/firebase/app/dist/index.cjs.js","firebase/auth":"../node_modules/firebase/auth/dist/index.esm.js","firebase/firestore":"../node_modules/firebase/firestore/dist/index.esm.js","firebase/storage":"../node_modules/firebase/storage/dist/index.esm.js"}],"../src/utils/isCode.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+function IsCode(qn) {
+  // checks whether is there code in question  mardkdown if yes reurn True else return false
+  //console.log("isCode",qn) 
+  var start;
+  var end;
+  var is_code = false;
+
+  for (var i = 0; i < qn.length - 3; i++) {
+    const f = qn[i] + qn[i + 1] + qn[i + 2]; //console.log(f)
+
+    if (f == "```") {
+      // console.log("got start",f,i)
+      start = i;
+      break;
+    }
+  }
+
+  if (start !== undefined) {
+    for (var i = start + 1; i < qn.length - 2; i++) {
+      const f = qn[i] + qn[i + 1] + qn[i + 2]; //console.log(f)
+
+      if (f == "```") {
+        //console.log("got end",f,i)
+        end = i;
+        break;
+      }
+    }
+  }
+
+  return [start, end]; // console.log("start,end ",start,end)
+}
+
+var _default = IsCode;
+exports.default = _default;
+},{}],"../src/qna/AnswerComp.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -108515,6 +108602,8 @@ var _dateFns = require("date-fns");
 
 var _reactMdEditor = _interopRequireDefault(require("@uiw/react-md-editor"));
 
+var _isCode = _interopRequireDefault(require("../utils/isCode"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const useStyles = (0, _styles.makeStyles)(theme => ({
@@ -108553,6 +108642,8 @@ function QuestionCardDetail({
 
   const [isUnLiked, setisUnLiked] = _react.default.useState(false);
 
+  const [is_code_in_ans, setis_code_in_ans] = _react.default.useState(false);
+
   const [likesNo, setlikesNo] = _react.default.useState(answer.no_of_likes);
 
   const [disLikesNo, setdisLikesNo] = _react.default.useState(answer.no_of_dislikes);
@@ -108567,6 +108658,18 @@ function QuestionCardDetail({
 
   const [expanded, setExpanded] = _react.default.useState(false);
 
+  const [cStart, cEnd] = (0, _isCode.default)(answer.answer_text);
+  console.log("-------------------------------------");
+
+  if (cEnd !== undefined) {
+    // console.log("code found",answer.answer_text.substring(cStart,cEnd))
+    var is_code = 1;
+  } else {
+    // console.log("not found code",answer.answer_text)
+    // console.log("start,end",cStart,cEnd)
+    var is_code = 0;
+  }
+
   return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_Card.default, {
     className: classes.root
   }, "ANSWER", /*#__PURE__*/_react.default.createElement(_CardHeader.default, {
@@ -108580,7 +108683,7 @@ function QuestionCardDetail({
     className: classes.background_md
   }, /*#__PURE__*/_react.default.createElement(_reactMdEditor.default.Markdown, {
     source: answer.answer_text
-  }))), /*#__PURE__*/_react.default.createElement(_CardActions.default, {
+  }), is_code == true ? /*#__PURE__*/_react.default.createElement("button", null, "Run") : "")), /*#__PURE__*/_react.default.createElement(_CardActions.default, {
     disableSpacing: true
   }, /*#__PURE__*/_react.default.createElement(_IconButton.default, {
     "aria-label": "add to favorites",
@@ -108613,7 +108716,7 @@ function QuestionCardDetail({
     color: "primary"
   }) : /*#__PURE__*/_react.default.createElement(_ThumbDownAltOutlined.default, null)), /*#__PURE__*/_react.default.createElement(_Typography.default, null, " ", disLikesNo))));
 }
-},{"react":"../node_modules/react/index.js","@material-ui/core/styles":"../node_modules/@material-ui/core/esm/styles/index.js","@material-ui/core/Card":"../node_modules/@material-ui/core/esm/Card/index.js","@material-ui/core/CardHeader":"../node_modules/@material-ui/core/esm/CardHeader/index.js","@material-ui/core/CardContent":"../node_modules/@material-ui/core/esm/CardContent/index.js","@material-ui/core/CardActions":"../node_modules/@material-ui/core/esm/CardActions/index.js","@material-ui/core/Avatar":"../node_modules/@material-ui/core/esm/Avatar/index.js","@material-ui/core/IconButton":"../node_modules/@material-ui/core/esm/IconButton/index.js","@material-ui/core/Typography":"../node_modules/@material-ui/core/esm/Typography/index.js","@material-ui/core/colors":"../node_modules/@material-ui/core/esm/colors/index.js","@material-ui/icons/ThumbUpAlt":"../node_modules/@material-ui/icons/ThumbUpAlt.js","@material-ui/icons/ThumbUpAltOutlined":"../node_modules/@material-ui/icons/ThumbUpAltOutlined.js","@material-ui/icons/ThumbDownAltOutlined":"../node_modules/@material-ui/icons/ThumbDownAltOutlined.js","@material-ui/icons/ThumbDown":"../node_modules/@material-ui/icons/ThumbDown.js","date-fns":"../node_modules/date-fns/esm/index.js","@uiw/react-md-editor":"../node_modules/@uiw/react-md-editor/lib/esm/index.js"}],"../src/*.module.css":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","@material-ui/core/styles":"../node_modules/@material-ui/core/esm/styles/index.js","@material-ui/core/Card":"../node_modules/@material-ui/core/esm/Card/index.js","@material-ui/core/CardHeader":"../node_modules/@material-ui/core/esm/CardHeader/index.js","@material-ui/core/CardContent":"../node_modules/@material-ui/core/esm/CardContent/index.js","@material-ui/core/CardActions":"../node_modules/@material-ui/core/esm/CardActions/index.js","@material-ui/core/Avatar":"../node_modules/@material-ui/core/esm/Avatar/index.js","@material-ui/core/IconButton":"../node_modules/@material-ui/core/esm/IconButton/index.js","@material-ui/core/Typography":"../node_modules/@material-ui/core/esm/Typography/index.js","@material-ui/core/colors":"../node_modules/@material-ui/core/esm/colors/index.js","@material-ui/icons/ThumbUpAlt":"../node_modules/@material-ui/icons/ThumbUpAlt.js","@material-ui/icons/ThumbUpAltOutlined":"../node_modules/@material-ui/icons/ThumbUpAltOutlined.js","@material-ui/icons/ThumbDownAltOutlined":"../node_modules/@material-ui/icons/ThumbDownAltOutlined.js","@material-ui/icons/ThumbDown":"../node_modules/@material-ui/icons/ThumbDown.js","date-fns":"../node_modules/date-fns/esm/index.js","@uiw/react-md-editor":"../node_modules/@uiw/react-md-editor/lib/esm/index.js","../utils/isCode":"../src/utils/isCode.js"}],"../src/*.module.css":[function(require,module,exports) {
 module.exports = {};
 },{}],"../node_modules/@material-ui/lab/esm/Skeleton/Skeleton.js":[function(require,module,exports) {
 "use strict";
@@ -108921,7 +109024,7 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 let qid = document.getElementById("app").dataset.qid;
-qid = "1iEGoFtKJgHq07yn2QSj";
+qid = "2Txf2YjSLNKGnYr0QPAn";
 const useStyles = (0, _styles.makeStyles)(theme => ({
   answers_background: {
     //maxWidth: 345,
@@ -108945,10 +109048,8 @@ function App() {
   const [answers_list, setanswers_list] = (0, _react.useState)([]);
   (0, _react.useEffect)(() => {
     _firebaseConfig.firestore.collection("questions_collection").doc(qid).get().then(doc => {
-      setquestion(doc.data());
-      console.log(doc.data());
-    }).catch(err => {
-      console.log(err, "while getting qn from fs");
+      setquestion(doc.data()); // console.log(doc.data());
+    }).catch(err => {// console.log(err, "while getting qn from fs");
     });
   }, []); //-----------------------
 
@@ -108959,16 +109060,13 @@ function App() {
         //console.log(item.data(), "1 ans--");
         let t = item.data();
         t["id"] = item.id;
-        ansList.push(t);
-        console.log(t);
-      });
-      console.log(ansList);
+        ansList.push(t); // console.log(t);
+      }); // console.log(ansList);
+
       setanswers_list(ansList);
     });
-  }, []);
-  console.log({
-    question
-  }, "question <--", answers_list, qid);
+  }, []); // console.log({ question }, "question <--", answers_list, qid);
+
   return /*#__PURE__*/_react.default.createElement("div", {
     className: classes.page
   }, /*#__PURE__*/_react.default.createElement("div", {

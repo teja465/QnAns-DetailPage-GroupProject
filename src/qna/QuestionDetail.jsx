@@ -14,6 +14,7 @@ import ThumbDownAltOutlinedIcon from "@material-ui/icons/ThumbDownAltOutlined";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
 import { formatDistance, subDays } from "date-fns";
 import MDEditor from "@uiw/react-md-editor";
+import IsCode from "../utils/IsCode"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -59,6 +60,7 @@ export default function QuestionCardDetail({ question }) {
     subDays(new Date(question.date), 0),
     new Date()
   );
+  // console.log(IsCode(question.body))
 
   //  questionDesc[Text]
   //Likes array
@@ -82,20 +84,15 @@ export default function QuestionCardDetail({ question }) {
           title={question.userName}
           subheader={date_on_profile}
         />
-        {/* <CardContent>
-          <Typography
-            variant="body1"
-            text="h1"
-            component="p"
-            className={classes.text}
-          >
-            <h1> {question.question}</h1>
-          </Typography>
-        </CardContent> */}
         <CardContent>
           <h3>{question.question}</h3>
           {/* Add markdown field here */}
+          {/* {console.log(question.body)} */}
           <div className={classes.background_md}>
+
+
+
+          
             <MDEditor.Markdown
               source={question.body}
               className={classes.md_style}

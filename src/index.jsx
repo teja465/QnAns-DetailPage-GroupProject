@@ -8,7 +8,7 @@ import AnswerComp from "./qna/AnswerComp";
 import classes from "*.module.css";
 import Loading from "./qna/Loading";
 let qid = document.getElementById("app").dataset.qid;
-qid="1iEGoFtKJgHq07yn2QSj"
+qid="2Txf2YjSLNKGnYr0QPAn"
 const useStyles = makeStyles((theme) => ({
   answers_background: {
     //maxWidth: 345,
@@ -38,13 +38,12 @@ function App() {
       .get()
       .then((doc) => {
         setquestion(doc.data());
-        console.log(doc.data());
+        // console.log(doc.data());
       })
       .catch((err) => {
-        console.log(err, "while getting qn from fs");
+        // console.log(err, "while getting qn from fs");
       });
   }, []);
-
   //-----------------------
   useEffect(() => {
     firestore
@@ -59,13 +58,13 @@ function App() {
           let t = item.data();
           t["id"] = item.id;
           ansList.push(t);
-          console.log(t);
+          // console.log(t);
         });
-        console.log(ansList);
+        // console.log(ansList);
         setanswers_list(ansList);
       });
   }, []);
-  console.log({ question }, "question <--", answers_list, qid);
+  // console.log({ question }, "question <--", answers_list, qid);
 
   return (
     <div className={classes.page}>

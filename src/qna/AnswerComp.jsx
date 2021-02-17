@@ -14,6 +14,7 @@ import ThumbDownAltOutlinedIcon from "@material-ui/icons/ThumbDownAltOutlined";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
 import { formatDistance, subDays } from "date-fns";
 import MDEditor from "@uiw/react-md-editor";
+import IsCode from "../utils/isCode"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,6 +48,7 @@ export default function QuestionCardDetail({ answer }) {
   const [isLiked, setisLiked] = React.useState(true);
 
   const [isUnLiked, setisUnLiked] = React.useState(false);
+  const [is_code_in_ans, setis_code_in_ans] = React.useState(false)
 
   const [likesNo, setlikesNo] = React.useState(answer.no_of_likes);
 
@@ -64,7 +66,18 @@ export default function QuestionCardDetail({ answer }) {
 
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
-
+  const [cStart,cEnd]=IsCode(answer.answer_text)
+  console.log("-------------------------------------")
+  if (cEnd!==undefined){
+    // console.log("code found",answer.answer_text.substring(cStart,cEnd))
+    var is_code=1
+  }
+  else{
+    // console.log("not found code",answer.answer_text)
+    // console.log("start,end",cStart,cEnd)
+    var is_code=0
+  } 
+  
   return (
     <div>
       <Card className={classes.root}>
@@ -83,6 +96,10 @@ export default function QuestionCardDetail({ answer }) {
           {/* Add markdown field here */}
           <div className={classes.background_md}>
             <MDEditor.Markdown source={answer.answer_text} />
+            {/* <button>Run</button> */}
+            {is_code==true? <button>Run</button>:""}
+            
+            
           </div>
         </CardContent>
         <CardActions disableSpacing>
